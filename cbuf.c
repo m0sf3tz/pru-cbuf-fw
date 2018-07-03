@@ -21,37 +21,41 @@
 
 static void wrap_around_memput(circular_buf_t * cbuf, char * src, uint32_t len)
 {
-    if(cbuf->head + len <= (cbuf->size-1)){
-        memcpy((void*)((uint32_t)cbuf->head + (uint32_t)cbuf->zeroth),(void*)(src), len);
+    if(*cbuf->head + len <= (cbuf->size-1)){
+        memcpy((void*)(*(cbuf->head) + (uint32_t)cbuf->zeroth),(void*)(src), len);
     }
     else
     {
-        uint32_t lenTop = (cbuf->size - cbuf->head);
-        uint32_t lenBot = (cbuf->head + len) % cbuf->size;;
+        uint32_t lenTop = (cbuf->size - *cbuf->head);
+        uint32_t lenBot = (*cbuf->head + len) % cbuf->size;;
 
-        memcpy((void*)((uint32_t)cbuf->head + (uint32_t)cbuf->zeroth), (void*)(src                 ), lenTop);
+        memcpy((void*)((uint32_t)*cbuf->head + (uint32_t)cbuf->zeroth), (void*)(src                 ), lenTop);
         memcpy((void*)cbuf->zeroth                                   , (void*)((uint32_t)src+lenTop), lenBot);
     }
 }
 #if DEBUG_MODE  //should only be called from the ARMv7
 static void wrap_around_memget(circular_buf_t * cbuf, char * dest, uint32_t len)
 {
-    if(cbuf->tail + len <= (cbuf->size-1)){
-        memcpy((void*)dest, (void*)((uint32_t)cbuf->tail + (uint32_t)cbuf->zeroth), len);
+    getArmLock();
+    uint32_t tail = *cbuf->tail;
+    putArmLock();
+
+    if(tail + len <= (cbuf->size-1)){
+        memcpy((void*)dest, (void*)(tail + (uint32_t)cbuf->zeroth), len);
     }
         else
     {
-        uint32_t lenTop = (cbuf->size - cbuf->tail);
-        uint32_t lenBot = (cbuf->tail + len) % cbuf->size;;
+        uint32_t lenTop = (cbuf->size - tail);
+        uint32_t lenBot = (tail + len) % cbuf->size;;
 
-        memcpy((void*)(dest)                 , (void*)((uint32_t)cbuf->tail + (uint32_t)cbuf->zeroth), lenTop);
-        memcpy((void*)((uint32_t)dest+lenTop), (void*)cbuf->zeroth,                                    lenBot);
+        memcpy((void*)(dest)                 , (void*)(tail       + (uint32_t)cbuf->zeroth), lenTop);
+        memcpy((void*)((uint32_t)dest+lenTop), (void*)cbuf->zeroth,                          lenBot);
     }
 }
 #endif
 
 
-int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, circular_buf_stats_t * stat)
+int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, circular_buf_stats_t * stat, uint32_t * sharedHead, uint32_t * sharedtail)
 {
     int r = -1;
 
@@ -60,11 +64,15 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
         getPruLock();
 
         cbuf->zeroth = zero;
-        cbuf->head   = 0;
-        cbuf->tail   = 0;
+        cbuf->head   = sharedHead;  //shared w/ ARM
+        cbuf->tail   = sharedtail;  //shared w/ ARM
         cbuf->full   = 0;
         cbuf->size   = size;
         cbuf->stat   = stat;
+
+        //zero out shared variables
+        *cbuf->tail = 0;
+        *cbuf->head = 0;
 
         putPruLock();
 
@@ -78,11 +86,11 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
 uint8_t circular_buf_empty(circular_buf_t *  cbuf)
 {
     getPruLock();
-    uint32_t head = cbuf->head;
+    uint32_t head = *cbuf->head;
     putPruLock();
 
     getArmLock();
-    uint32_t tail = cbuf->tail;
+    uint32_t tail = *cbuf->tail;
     putArmLock();
 
     // We define empty as head == tail
@@ -97,11 +105,11 @@ uint8_t circular_buf_full(circular_buf_t * cbuf)
 int circular_buf_space(circular_buf_t * cbuf)
 {
     getPruLock();
-    uint32_t head = cbuf->head;
+    uint32_t head = *cbuf->head;
     putPruLock();
 
     getArmLock();
-    uint32_t tail = cbuf->tail;
+    uint32_t tail = *cbuf->tail;
     putArmLock();
 
     if(head == tail)
@@ -121,7 +129,7 @@ int circular_buf_space(circular_buf_t * cbuf)
 void circular_buf_next_head(circular_buf_t * cbuf, uint32_t put)
 {
     getPruLock();
-    cbuf->head = (cbuf->head + put)%cbuf->size;
+    *(cbuf->head) = (*(cbuf->head) + put)%cbuf->size;
     putPruLock();
 }
 
@@ -129,7 +137,7 @@ void circular_buf_next_head(circular_buf_t * cbuf, uint32_t put)
 void circular_buf_next_tail(circular_buf_t * cbuf, uint32_t get)
 {
     getArmLock();
-    cbuf->tail = (cbuf->tail + get)%cbuf->size;
+    *(cbuf->tail) = (*(cbuf->tail) + get)%cbuf->size;
     putArmLock();
 }
 #endif

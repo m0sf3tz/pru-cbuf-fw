@@ -22,8 +22,8 @@ typedef union
 
 
 typedef struct {
-    uint32_t head;
-    uint32_t tail;
+    uint32_t * head;
+    uint32_t * tail;
     uint32_t * zeroth;
     circular_buf_stats_t * stat;
     uint32_t size; //of the buffer
@@ -34,7 +34,7 @@ typedef struct {
 
 static  void wrap_around_memput(circular_buf_t * cbuf, char * src, uint32_t len);
 static  void wrap_around_memget(circular_buf_t * cbuf, char * dest, uint32_t len);
-int     circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, circular_buf_stats_t * stat);
+int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, circular_buf_stats_t * stat, uint32_t * sharedHead, uint32_t * sharedtail);
 uint8_t circular_buf_empty(circular_buf_t * cbuf);
 uint8_t circular_buf_full(circular_buf_t * cbuf);
 int     circular_buf_space(circular_buf_t * cbuf);
