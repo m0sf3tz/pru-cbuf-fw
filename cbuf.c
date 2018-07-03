@@ -89,9 +89,9 @@ uint8_t circular_buf_empty(circular_buf_t *  cbuf)
     return (head == tail);
 }
 
-uint8_t circular_buf_full(circular_buf_t cbuf)
+uint8_t circular_buf_full(circular_buf_t * cbuf)
 {
-    return ((cbuf.full));
+    return (circular_buf_space(cbuf) == (cbuf->size-1));
 }
 
 int circular_buf_space(circular_buf_t * cbuf)

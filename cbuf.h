@@ -36,7 +36,7 @@ static  void wrap_around_memput(circular_buf_t * cbuf, char * src, uint32_t len)
 static  void wrap_around_memget(circular_buf_t * cbuf, char * dest, uint32_t len);
 int     circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, circular_buf_stats_t * stat);
 uint8_t circular_buf_empty(circular_buf_t * cbuf);
-uint8_t circular_buf_full(circular_buf_t cbuf);
+uint8_t circular_buf_full(circular_buf_t * cbuf);
 int     circular_buf_space(circular_buf_t * cbuf);
 void    circular_buf_next_head(circular_buf_t * cbuf, uint32_t put);
 void    circular_buf_next_tail(circular_buf_t * cbuf, uint32_t get);

@@ -10,18 +10,14 @@
 
 circular_buf_stats_t bufStat;
 
-
 void cleanBuff0(){
    memset((void*)SHBUF0_START, 0, SHBUF0_SIZE);
 }
 
-void fillBuff(){
 
-    //getArmLock();
-    //int freespace =  (*(volatile uint32_t*)SHBUF0_HEAD_OFFSET -
 
-}
-
+int u = 0xFFFF;  //data
+int z;           //bss
 
 void main(void)
 {
@@ -31,21 +27,16 @@ void main(void)
     circular_buf_t         buf0;
     circular_buf_stats_t   stat;
     stat.flags = 1;
-    circular_buf_reset(&buf0, SHBUF0_START, SHBUF0_SIZE, &stat);
+    circular_buf_reset(&buf0, (uint32_t*)SHBUF0_START, SHBUF0_SIZE, &stat);
 
 
     while(1){
+        char tmp0[] = {1,2,3,4,6,7,8,9,10};
+        memcpy(&z, tmp0, 4);
+        z = z | u;
 
-        char tmp0[]  = {1, 2 ,3 , 4 ,5};
-        char tmp1[]  = {0 ,0 ,0 , 0, 0};
-
-        circular_buf_put(&buf0, tmp0,  sizeof(tmp0));
-        //circular_buf_get(&buf0, tmp1,  sizeof(tmp1));
-
-        if(memcmp( (void*)(tmp0), (void*)(tmp1), sizeof(tmp0)) )
-        {
-            while(1);
-        }
+        if(circular_buf_space(&buf0) >= sizeof(u) )
+            circular_buf_put(&buf0, &z,  4);
     }
 
     /* TODO: Create stop condition, else it will toggle indefinitely */
