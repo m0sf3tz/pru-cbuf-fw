@@ -10,6 +10,7 @@
 #include <pru_cfg.h>
 #include <cstring>
 
+#include "spinlock.h"
 #include "cbuf.h"
 
 
@@ -74,10 +75,18 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
 }
 
 
-uint8_t circular_buf_empty(circular_buf_t cbuf)
+uint8_t circular_buf_empty(circular_buf_t *  cbuf)
 {
+    getPruLock();
+    uint32_t head = cbuf->head;
+    putPruLock();
+
+    getArmLock();
+    uint32_t tail = cbuf->tail;
+    putArmLock();
+
     // We define empty as head == tail
-    return (cbuf.head == cbuf.tail);
+    return (head == tail);
 }
 
 uint8_t circular_buf_full(circular_buf_t cbuf)
@@ -95,14 +104,14 @@ int circular_buf_space(circular_buf_t * cbuf)
     uint32_t tail = cbuf->tail;
     putArmLock();
 
-    if(cbuf->head == cbuf->tail)
+    if(head == tail)
         return cbuf->size;
 
-    else if(cbuf->head > cbuf->tail)
-        return (cbuf->size - (cbuf->head - cbuf->tail) - 1);
+    else if(head > tail)
+        return (cbuf->size - (head - tail) - 1);
 
-    else if(cbuf->head < cbuf->tail)
-        return (cbuf->tail - cbuf->head) - 1;
+    else if(head < tail)
+        return (tail - head) - 1;
 
     else
         return -1;
@@ -111,13 +120,17 @@ int circular_buf_space(circular_buf_t * cbuf)
 
 void circular_buf_next_head(circular_buf_t * cbuf, uint32_t put)
 {
+    getPruLock();
     cbuf->head = (cbuf->head + put)%cbuf->size;
+    putPruLock();
 }
 
 #if DEBUG_MODE  //should only be called from the ARMv7
 void circular_buf_next_tail(circular_buf_t * cbuf, uint32_t get)
 {
+    getArmLock();
     cbuf->tail = (cbuf->tail + get)%cbuf->size;
+    putArmLock();
 }
 #endif
 

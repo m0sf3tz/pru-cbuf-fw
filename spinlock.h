@@ -9,7 +9,6 @@
 #define SPINLOCK_H_
 
 
-
 void getPruLock(); //head (moved by PRU)
 void putPruLock(); //head (moved by PRU)
 

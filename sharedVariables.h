@@ -1,6 +1,6 @@
 
-#define PRU_LOCK_OFFSET 0x480CA800
-#define PRU_ARM_OFFSET  0x480CA804
+#define PRU_LOCK_OFFSET 0x480CA800  //head (moved by PRU)
+#define PRU_ARM_OFFSET  0x480CA804  //tail (moved by ARM)
 
 #define SHBUF0_START    0x90000000
 #define SHBUF0_SIZE     0x4000

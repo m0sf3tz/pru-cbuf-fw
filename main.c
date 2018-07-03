@@ -10,21 +10,6 @@
 
 circular_buf_stats_t bufStat;
 
-void getPruLock(){
-    while(*(volatile uint32_t*)PRU_LOCK_OFFSET){}
-}
-
-void putPruLock(){
-    (*(volatile uint32_t*)PRU_LOCK_OFFSET) = 0;
-}
-
-void getArmLock(){
-    while(*(volatile uint32_t*)PRU_ARM_OFFSET){}
-}
-
-void putArmLock(){
-    (*(volatile uint32_t*)PRU_ARM_OFFSET) = 0;
-}
 
 void cleanBuff0(){
    memset((void*)SHBUF0_START, 0, SHBUF0_SIZE);
