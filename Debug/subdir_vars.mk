@@ -10,31 +10,37 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../cbuf.c \
+../lfsr.c \
 ../main.c \
 ../spinlock.c 
 
 C_DEPS += \
 ./cbuf.d \
+./lfsr.d \
 ./main.d \
 ./spinlock.d 
 
 OBJS += \
 ./cbuf.obj \
+./lfsr.obj \
 ./main.obj \
 ./spinlock.obj 
 
 OBJS__QUOTED += \
 "cbuf.obj" \
+"lfsr.obj" \
 "main.obj" \
 "spinlock.obj" 
 
 C_DEPS__QUOTED += \
 "cbuf.d" \
+"lfsr.d" \
 "main.d" \
 "spinlock.d" 
 
 C_SRCS__QUOTED += \
 "../cbuf.c" \
+"../lfsr.c" \
 "../main.c" \
 "../spinlock.c" 
 

@@ -22,6 +22,7 @@ main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__config_compat_post
 main.obj: ../spinlock.h
 main.obj: ../sharedVariables.h
 main.obj: ../cbuf.h
+main.obj: ../lfsr.h
 
 ../main.c: 
 K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/stdint.h: 
@@ -45,3 +46,4 @@ K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__config_compat_post.h:
 ../spinlock.h: 
 ../sharedVariables.h: 
 ../cbuf.h: 
+../lfsr.h: 

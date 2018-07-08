@@ -11,6 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./cbuf.obj" \
+"./lfsr.obj" \
 "./main.obj" \
 "./spinlock.obj" \
 "../AM335x_PRU.cmd" \
@@ -156,8 +157,8 @@ for_real.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "cbuf.obj" "main.obj" "spinlock.obj" 
-	-$(RM) "cbuf.d" "main.d" "spinlock.d" 
+	-$(RM) "cbuf.obj" "lfsr.obj" "main.obj" "spinlock.obj" 
+	-$(RM) "cbuf.d" "lfsr.d" "main.d" "spinlock.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
