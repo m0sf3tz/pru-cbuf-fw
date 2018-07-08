@@ -1,7 +1,7 @@
 
 #define PRU_LOCK_OFFSET    0x480CA800  //head (moved by PRU)
 #define ARM_LOCK_OFFSET    0x480CA804  //tail (moved by ARM)
-#define STAT_LOCK_OFFSET   0x480CA808
+#define STAT_LOCK_OFFSET   0x480CA808  //memory modified by PRU, read by ARM
 
 
 #define SHBUF0_START    0x90000000

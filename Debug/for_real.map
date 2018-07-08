@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.2.1                      
 ******************************************************************************
->> Linked Sat Jul  7 16:55:34 2018
+>> Linked Sat Jul  7 17:08:31 2018
 
 OUTPUT FILE NAME:   <for_real.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000000
@@ -12,7 +12,7 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  00000594  00001a6c  RWIX
+  PRU_IMEM              00000000   00002000  000005d4  00001a2c  RWIX
 
 PAGE 1:
   PRU_DMEM_0_1          00000000   00002000  00000105  00001efb  RWIX
@@ -60,23 +60,25 @@ section   page    origin      length       input sections
 *          0    00000000    0000001c     
                   00000000    0000001c     rtspruv3_le.lib : boot.obj (.text:_c_int00_noinit_noargs)
 
-.text      0    0000001c    00000578     
+.text      0    0000001c    000005b8     
                   0000001c    000000d4     cbuf.obj (.text:wrap_around_memput)
                   000000f0    000000c8     cbuf.obj (.text:circular_buf_reset)
                   000001b8    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
                   0000027c    000000b0     main.obj (.text:main)
                   0000032c    00000090     cbuf.obj (.text:circular_buf_space)
-                  000003bc    00000084     cbuf.obj (.text:circular_buf_put)
-                  00000440    00000054     cbuf.obj (.text:circular_buf_next_head)
-                  00000494    00000034     rtspruv3_le.lib : memcpy.obj (.text)
-                  000004c8    00000030     main.obj (.text:init)
-                  000004f8    00000020     spinlock.obj (.text:getHeadLock)
-                  00000518    00000020     spinlock.obj (.text:getTailLock)
-                  00000538    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
-                  00000554    00000018     spinlock.obj (.text:putHeadLock)
-                  0000056c    00000018     spinlock.obj (.text:putTailLock)
-                  00000584    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  0000058c    00000008                     : exit.obj (.text:loader_exit)
+                  000003bc    0000008c     cbuf.obj (.text:circular_buf_put)
+                  00000448    00000054     cbuf.obj (.text:circular_buf_next_head)
+                  0000049c    00000034     rtspruv3_le.lib : memcpy.obj (.text)
+                  000004d0    00000030     main.obj (.text:init)
+                  00000500    00000020     spinlock.obj (.text:getHeadLock)
+                  00000520    00000020     spinlock.obj (.text:getStatLock)
+                  00000540    00000020     spinlock.obj (.text:getTailLock)
+                  00000560    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
+                  0000057c    00000018     spinlock.obj (.text:putHeadLock)
+                  00000594    00000018     spinlock.obj (.text:putStatLock)
+                  000005ac    00000018     spinlock.obj (.text:putTailLock)
+                  000005c4    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  000005cc    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
@@ -105,11 +107,11 @@ MODULE SUMMARY
        Module         code   ro data   rw data
        ------         ----   -------   -------
     .\
-       cbuf.obj       772    0         68     
+       cbuf.obj       780    0         68     
        main.obj       224    5         0      
-       spinlock.obj   112    0         0      
+       spinlock.obj   168    0         0      
     +--+--------------+------+---------+---------+
-       Total:         1108   5         68     
+       Total:         1172   5         68     
                                               
     K:\ccsv8\tools\compiler\ti-cgt-pru_2.2.1\lib\rtspruv3_le.lib
        remu_c.obj     196    0         0      
@@ -122,7 +124,7 @@ MODULE SUMMARY
                                               
        Stack:         0      0         256    
     +--+--------------+------+---------+---------+
-       Grand Total:   1428   5         324    
+       Grand Total:   1492   5         324    
 
 
 SEGMENT ATTRIBUTES
@@ -137,7 +139,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                         
 ----  -------   ----                         
-0     0000058c  C$$EXIT                      
+0     000005cc  C$$EXIT                      
 2     00026000  CT_CFG                       
 abs   481cc000  __PRU_CREG_BASE_DCAN0        
 abs   481d0000  __PRU_CREG_BASE_DCAN1        
@@ -209,19 +211,21 @@ abs   ffffffff  __c_args__
 0     000001b8  __pruabi_remu                
 0     00000000  _c_int00_noinit_noargs       
 1     00000000  _stack                       
-0     00000584  abort                        
-0     00000440  circular_buf_next_head       
+0     000005c4  abort                        
+0     00000448  circular_buf_next_head       
 0     000003bc  circular_buf_put             
 0     000000f0  circular_buf_reset           
 0     0000032c  circular_buf_space           
-0     000004f8  getHeadLock                  
-0     00000518  getTailLock                  
-0     000004c8  init                         
+0     00000500  getHeadLock                  
+0     00000520  getStatLock                  
+0     00000540  getTailLock                  
+0     000004d0  init                         
 0     0000027c  main                         
-0     00000494  memcpy                       
-0     00000538  memset                       
-0     00000554  putHeadLock                  
-0     0000056c  putTailLock                  
+0     0000049c  memcpy                       
+0     00000560  memset                       
+0     0000057c  putHeadLock                  
+0     00000594  putStatLock                  
+0     000005ac  putTailLock                  
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -234,16 +238,18 @@ page  address   name
 0     0000027c  main                         
 0     0000032c  circular_buf_space           
 0     000003bc  circular_buf_put             
-0     00000440  circular_buf_next_head       
-0     00000494  memcpy                       
-0     000004c8  init                         
-0     000004f8  getHeadLock                  
-0     00000518  getTailLock                  
-0     00000538  memset                       
-0     00000554  putHeadLock                  
-0     0000056c  putTailLock                  
-0     00000584  abort                        
-0     0000058c  C$$EXIT                      
+0     00000448  circular_buf_next_head       
+0     0000049c  memcpy                       
+0     000004d0  init                         
+0     00000500  getHeadLock                  
+0     00000520  getStatLock                  
+0     00000540  getTailLock                  
+0     00000560  memset                       
+0     0000057c  putHeadLock                  
+0     00000594  putStatLock                  
+0     000005ac  putTailLock                  
+0     000005c4  abort                        
+0     000005cc  C$$EXIT                      
 1     00000000  _stack                       
 1     00000100  __TI_STACK_END               
 2     00026000  CT_CFG                       
@@ -314,4 +320,4 @@ abs   4a100000  __PRU_CREG_BASE_GEMAC
 abs   80000000  __PRU_CREG_BASE_DDR          
 abs   ffffffff  __c_args__                   
 
-[85 symbols]
+[87 symbols]

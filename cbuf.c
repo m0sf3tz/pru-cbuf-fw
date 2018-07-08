@@ -147,7 +147,7 @@ int circular_buf_put(circular_buf_t * cbuf, char * src, size_t len)
     if(len > size){
         getStatLock();
         (*(cbuf->stat)).overflow = 1;
-        putStatLock()
+        putStatLock();
         return ret;
     }
 
