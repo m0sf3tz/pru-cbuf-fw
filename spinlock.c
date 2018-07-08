@@ -8,18 +8,26 @@
 
 #include "sharedVariables.h"
 
-void getPruLock(){
+void getHeadLock(){
     while(*(volatile uint32_t*)PRU_LOCK_OFFSET){}
 }
 
-void putPruLock(){
+void putHeadLock(){
     (*(volatile uint32_t*)PRU_LOCK_OFFSET) = 0;
 }
 
-void getArmLock(){
-    while(*(volatile uint32_t*)PRU_ARM_OFFSET){}
+void getTailLock(){
+    while(*(volatile uint32_t*)ARM_LOCK_OFFSET){}
 }
 
-void putArmLock(){
-    (*(volatile uint32_t*)PRU_ARM_OFFSET) = 0;
+void putTailLock(){
+    (*(volatile uint32_t*)ARM_LOCK_OFFSET) = 0;
+}
+
+void getStatLock(){
+    while(*(volatile uint32_t*)STAT_LOCK_OFFSET){}
+}
+
+void putStatLock(){
+    (*(volatile uint32_t*)STAT_LOCK_OFFSET) = 0;
 }

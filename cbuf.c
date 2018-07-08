@@ -36,9 +36,9 @@ static void wrap_around_memput(circular_buf_t * cbuf, char * src, uint32_t len)
 #if DEBUG_MODE  //should only be called from the ARMv7
 static void wrap_around_memget(circular_buf_t * cbuf, char * dest, uint32_t len)
 {
-    getArmLock();
+    getTailLock();
     uint32_t tail = *cbuf->tail;
-    putArmLock();
+    putTailLock();
 
     if(tail + len <= (cbuf->size-1)){
         memcpy((void*)dest, (void*)(tail + (uint32_t)cbuf->zeroth), len);
@@ -61,7 +61,7 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
 
     if(cbuf)
     {
-        getPruLock();
+        getHeadLock();
 
         cbuf->zeroth = zero;
         cbuf->head   = sharedHead;  //shared w/ ARM
@@ -74,7 +74,7 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
         *cbuf->tail = 0;
         *cbuf->head = 0;
 
-        putPruLock();
+        putHeadLock();
 
         r = 0;
     }
@@ -85,13 +85,11 @@ int circular_buf_reset(circular_buf_t * cbuf, uint32_t * zero, uint32_t size, ci
 
 uint8_t circular_buf_empty(circular_buf_t *  cbuf)
 {
-    getPruLock();
     uint32_t head = *cbuf->head;
-    putPruLock();
 
-    getArmLock();
+    getTailLock();
     uint32_t tail = *cbuf->tail;
-    putArmLock();
+    putTailLock();
 
     // We define empty as head == tail
     return (head == tail);
@@ -104,13 +102,11 @@ uint8_t circular_buf_full(circular_buf_t * cbuf)
 
 int circular_buf_space(circular_buf_t * cbuf)
 {
-    getPruLock();
     uint32_t head = *cbuf->head;
-    putPruLock();
 
-    getArmLock();
+    getTailLock();
     uint32_t tail = *cbuf->tail;
-    putArmLock();
+    putTailLock();
 
     if(head == tail)
         return cbuf->size;
@@ -128,17 +124,17 @@ int circular_buf_space(circular_buf_t * cbuf)
 
 void circular_buf_next_head(circular_buf_t * cbuf, uint32_t put)
 {
-    getPruLock();
+    getHeadLock();
     *(cbuf->head) = (*(cbuf->head) + put)%cbuf->size;
-    putPruLock();
+    putHeadLock();
 }
 
 #if DEBUG_MODE  //should only be called from the ARMv7
 void circular_buf_next_tail(circular_buf_t * cbuf, uint32_t get)
 {
-    getArmLock();
+    getTailLock();
     *(cbuf->tail) = (*(cbuf->tail) + get)%cbuf->size;
-    putArmLock();
+    putTailLock();
 }
 #endif
 
@@ -149,7 +145,9 @@ int circular_buf_put(circular_buf_t * cbuf, char * src, size_t len)
     uint32_t size = circular_buf_space(cbuf);
 
     if(len > size){
+        getStatLock();
         (*(cbuf->stat)).overflow = 1;
+        putStatLock()
         return ret;
     }
 

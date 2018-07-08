@@ -9,13 +9,15 @@
 #define SPINLOCK_H_
 
 
-void getPruLock(); //head (moved by PRU)
-void putPruLock(); //head (moved by PRU)
+void getHeadLock(); //head (moved by PRU)
+void putHeadLock(); //head (moved by PRU)
 
 
-void getArmLock(); //tail (moved by ARM)
-void putArmLock(); //tail (moved by ARM)
+void getTailLock(); //tail (moved by ARM)
+void putTailLock(); //tail (moved by ARM)
 
 
+void getStatLock();
+void putStatLock();
 
 #endif /* SPINLOCK_H_ */
