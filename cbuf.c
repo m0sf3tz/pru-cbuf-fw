@@ -18,10 +18,11 @@
 //we put in at the head.
 //we take out at the tail
 
+extern int x;
 
 static void wrap_around_memput(circular_buf_t * cbuf, char * src, uint32_t len)
 {
-    if(*cbuf->head + len <= (cbuf->size-1)){
+    if(*cbuf->head + len <= (cbuf->size)){
         memcpy((void*)(*(cbuf->head) + (uint32_t)cbuf->zeroth),(void*)(src), len);
     }
     else
@@ -150,6 +151,7 @@ int circular_buf_put(circular_buf_t * cbuf, char * src, size_t len)
         putStatLock();
         return ret;
     }
+    x++;
 
     wrap_around_memput(cbuf, src, len);
 
