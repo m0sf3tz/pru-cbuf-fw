@@ -24,7 +24,7 @@ lfsr_t glfsr_d0;
 uint64_t poly = 0x1081;
 
 void main(void)
- {
+{
     x = 0;
     /* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
@@ -42,11 +42,11 @@ void main(void)
 
     while(1)
     {
-       if(circular_buf_space(&buf0) > 4)
+       if(circular_buf_space(&buf0) > 1)
        {
-           uint64_t data = (glfsr_d0.data & 0xFFFFFFFF);
+           uint64_t data = (glfsr_d0.data & 0xFF);
            GLFSR_next(&glfsr_d0);
-           circular_buf_put(&buf0, (char*)&data,  sizeof(uint32_t));
+           circular_buf_put(&buf0, (char*)&data,  sizeof(char));
        }
     }
 
