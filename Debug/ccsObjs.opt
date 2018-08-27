@@ -1,1 +1,1 @@
-"./cbuf.obj" "./lfsr.obj" "./main.obj" "./spinlock.obj" "../AM335x_PRU.cmd" -llibc.a 
+"./cbuf.obj" "./lfsr.obj" "./main.obj" "./spinlock.obj" "./uartHal.obj" "../AM335x_PRU.cmd" -llibc.a 

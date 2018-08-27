@@ -6,13 +6,16 @@
 #include "sharedVariables.h"
 #include "cbuf.h"
 #include "lfsr.h"
+#include "uartHal.h"
+
+#include "registerOffsets.h"
 
 #define PRU_LOCK_OFFSET 0x480CA800
 #define ARM_LOCK_OFFSET  0x480CA804
 
 circular_buf_stats_t bufStat;
 
-void init(){
+void initSpinLock(){
    memset((void*)SHBUF0_START, 0, SHBUF0_SIZE);
 
     putHeadLock();
@@ -23,16 +26,33 @@ int x;
 lfsr_t glfsr_d0;
 uint64_t poly = 0x1081;
 
+void initClocks()
+{
+    //we should not really have to, but lets set the clock on for the spinlock interface just incase we forget to in linux land...
+    *(volatile uint32_t*)(CLOCK_CTRL_BASE + SPINLOCK_CLK_CTRL_OFFSET) = ENABLE_CLOCK;
+
+    //dito UART2 clocks
+    *(volatile uint32_t*)(CLOCK_CTRL_BASE + UART2_CLK_CTRL_OFFSET   ) = ENABLE_CLOCK;
+}
+
 void main(void)
 {
+
     x = 0;
     /* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
-    //zero out the buffers, give up spinlocks incase someone is holding them for some reason
-    init();
+    //don't think we need this,
+    *(volatile uint32_t*)(0x44E00400+0xb4) = 0x2;
 
-    //we should not really have to, but lets set the clock on for the spinlock interface just incase we forget to in linux land...
-    *(volatile uint32_t*)(0x44E0010C) = 0x2;
+    //init the clocks
+    initClocks();
+
+    //zero out the buffers, give up spinlocks incase someone is holding them for some reason
+    initSpinLock();
+
+
+
+    uartDebug();
 
     circular_buf_t         buf0;
     circular_buf_stats_t   stat;

@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.2.1                      
 ******************************************************************************
->> Linked Sun Jul  8 20:59:52 2018
+>> Linked Sun Aug 26 19:37:56 2018
 
 OUTPUT FILE NAME:   <for_real.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000000
@@ -12,10 +12,10 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  000007f0  00001810  RWIX
+  PRU_IMEM              00000000   00002000  00000950  000016b0  RWIX
 
 PAGE 1:
-  PRU_DMEM_0_1          00000000   00002000  00000124  00001edc  RWIX
+  PRU_DMEM_0_1          00000000   00002000  00000139  00001ec7  RWIX
   PRU_DMEM_1_0          00002000   00002000  00000000  00002000  RWIX
 
 PAGE 2:
@@ -60,40 +60,44 @@ section   page    origin      length       input sections
 *          0    00000000    0000001c     
                   00000000    0000001c     rtspruv3_le.lib : boot.obj (.text:_c_int00_noinit_noargs)
 
-.text      0    0000001c    000007d4     
-                  0000001c    000000e0     main.obj (.text:main)
-                  000000fc    000000d0     cbuf.obj (.text:wrap_around_memput)
-                  000001cc    000000c8     cbuf.obj (.text:circular_buf_reset)
-                  00000294    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
-                  00000358    000000b8     lfsr.obj (.text:GLFSR_init)
-                  00000410    00000090     cbuf.obj (.text:circular_buf_space)
-                  000004a0    0000008c     cbuf.obj (.text:circular_buf_put)
-                  0000052c    00000078     lfsr.obj (.text:GLFSR_next)
-                  000005a4    00000070     rtspruv3_le.lib : lslll.obj (.text:__pruabi_lslll)
-                  00000614    00000054     cbuf.obj (.text:circular_buf_next_head)
-                  00000668    00000050     rtspruv3_le.lib : lsrll.obj (.text:__pruabi_lsrll)
-                  000006b8    00000034                     : memcpy.obj (.text)
-                  000006ec    00000030     main.obj (.text:init)
-                  0000071c    00000020     spinlock.obj (.text:getHeadLock)
-                  0000073c    00000020     spinlock.obj (.text:getStatLock)
-                  0000075c    00000020     spinlock.obj (.text:getTailLock)
-                  0000077c    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
-                  00000798    00000018     spinlock.obj (.text:putHeadLock)
-                  000007b0    00000018     spinlock.obj (.text:putStatLock)
-                  000007c8    00000018     spinlock.obj (.text:putTailLock)
-                  000007e0    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  000007e8    00000008                     : exit.obj (.text:loader_exit)
+.text      0    0000001c    00000934     
+                  0000001c    00000134     uartHal.obj (.text:uartDebug)
+                  00000150    000000e8     main.obj (.text:main)
+                  00000238    000000d0     cbuf.obj (.text:wrap_around_memput)
+                  00000308    000000c8     cbuf.obj (.text:circular_buf_reset)
+                  000003d0    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
+                  00000494    000000b8     lfsr.obj (.text:GLFSR_init)
+                  0000054c    00000090     cbuf.obj (.text:circular_buf_space)
+                  000005dc    0000008c     cbuf.obj (.text:circular_buf_put)
+                  00000668    00000078     lfsr.obj (.text:GLFSR_next)
+                  000006e0    00000070     rtspruv3_le.lib : lslll.obj (.text:__pruabi_lslll)
+                  00000750    00000054     cbuf.obj (.text:circular_buf_next_head)
+                  000007a4    00000050     rtspruv3_le.lib : lsrll.obj (.text:__pruabi_lsrll)
+                  000007f4    00000034                     : memcpy.obj (.text)
+                  00000828    00000030     main.obj (.text:initSpinLock)
+                  00000858    00000024     main.obj (.text:initClocks)
+                  0000087c    00000020     spinlock.obj (.text:getHeadLock)
+                  0000089c    00000020     spinlock.obj (.text:getStatLock)
+                  000008bc    00000020     spinlock.obj (.text:getTailLock)
+                  000008dc    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
+                  000008f8    00000018     spinlock.obj (.text:putHeadLock)
+                  00000910    00000018     spinlock.obj (.text:putStatLock)
+                  00000928    00000018     spinlock.obj (.text:putTailLock)
+                  00000940    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  00000948    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
                   00000004    000000fc     --HOLE--
 
-.bss       1    00000100    0000001c     UNINITIALIZED
+.bss       1    00000100    0000002d     UNINITIALIZED
                   00000100    00000018     (.common:glfsr_d0)
-                  00000118    00000004     (.common:x)
+                  00000118    00000011     (.common:hostBuffer)
+                  00000129    00000004     (.common:x)
 
-.data      1    0000011c    00000008     
-                  0000011c    00000008     main.obj (.data)
+.data      1    0000012d    0000000c     
+                  0000012d    00000008     main.obj (.data)
+                  00000135    00000004     uartHal.obj (.data)
 
 .cinit     1    00000000    00000000     UNINITIALIZED
 
@@ -116,11 +120,12 @@ MODULE SUMMARY
        ------         ----   -------   -------
     .\
        cbuf.obj       776    0         68     
-       main.obj       272    0         36     
+       main.obj       316    0         36     
+       uartHal.obj    308    0         21     
        lfsr.obj       304    0         0      
        spinlock.obj   168    0         0      
     +--+--------------+------+---------+---------+
-       Total:         1520   0         104    
+       Total:         1872   0         125    
                                               
     K:\ccsv8\tools\compiler\ti-cgt-pru_2.2.1\lib\rtspruv3_le.lib
        remu_c.obj     196    0         0      
@@ -135,7 +140,7 @@ MODULE SUMMARY
                                               
        Stack:         0      0         256    
     +--+--------------+------+---------+---------+
-       Grand Total:   2032   0         360    
+       Grand Total:   2384   0         381    
 
 
 SEGMENT ATTRIBUTES
@@ -150,10 +155,10 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                         
 ----  -------   ----                         
-0     000007e8  C$$EXIT                      
+0     00000948  C$$EXIT                      
 2     00026000  CT_CFG                       
-0     00000358  GLFSR_init                   
-0     0000052c  GLFSR_next                   
+0     00000494  GLFSR_init                   
+0     00000668  GLFSR_next                   
 abs   481cc000  __PRU_CREG_BASE_DCAN0        
 abs   481d0000  __PRU_CREG_BASE_DCAN1        
 abs   80000000  __PRU_CREG_BASE_DDR          
@@ -221,29 +226,33 @@ abs   0000000c  __PRU_CREG_UART2
 1     00000100  __TI_STACK_END               
 abs   00000100  __TI_STACK_SIZE              
 abs   ffffffff  __c_args__                   
-0     000005a4  __pruabi_lslll               
-0     00000668  __pruabi_lsrll               
-0     00000294  __pruabi_remu                
+0     000006e0  __pruabi_lslll               
+0     000007a4  __pruabi_lsrll               
+0     000003d0  __pruabi_remu                
 0     00000000  _c_int00_noinit_noargs       
 1     00000000  _stack                       
-0     000007e0  abort                        
-0     00000614  circular_buf_next_head       
-0     000004a0  circular_buf_put             
-0     000001cc  circular_buf_reset           
-0     00000410  circular_buf_space           
-0     0000071c  getHeadLock                  
-0     0000073c  getStatLock                  
-0     0000075c  getTailLock                  
+0     00000940  abort                        
+0     00000750  circular_buf_next_head       
+0     000005dc  circular_buf_put             
+0     00000308  circular_buf_reset           
+0     0000054c  circular_buf_space           
+0     0000087c  getHeadLock                  
+0     0000089c  getStatLock                  
+0     000008bc  getTailLock                  
 1     00000100  glfsr_d0                     
-0     000006ec  init                         
-0     0000001c  main                         
-0     000006b8  memcpy                       
-0     0000077c  memset                       
-1     0000011c  poly                         
-0     00000798  putHeadLock                  
-0     000007b0  putStatLock                  
-0     000007c8  putTailLock                  
-1     00000118  x                            
+1     00000118  hostBuffer                   
+0     00000858  initClocks                   
+0     00000828  initSpinLock                 
+0     00000150  main                         
+0     000007f4  memcpy                       
+0     000008dc  memset                       
+1     0000012d  poly                         
+0     000008f8  putHeadLock                  
+0     00000910  putStatLock                  
+0     00000928  putTailLock                  
+0     0000001c  uartDebug                    
+1     00000135  uartHandle                   
+1     00000129  x                            
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -251,32 +260,36 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 page  address   name                         
 ----  -------   ----                         
 0     00000000  _c_int00_noinit_noargs       
-0     0000001c  main                         
-0     000001cc  circular_buf_reset           
-0     00000294  __pruabi_remu                
-0     00000358  GLFSR_init                   
-0     00000410  circular_buf_space           
-0     000004a0  circular_buf_put             
-0     0000052c  GLFSR_next                   
-0     000005a4  __pruabi_lslll               
-0     00000614  circular_buf_next_head       
-0     00000668  __pruabi_lsrll               
-0     000006b8  memcpy                       
-0     000006ec  init                         
-0     0000071c  getHeadLock                  
-0     0000073c  getStatLock                  
-0     0000075c  getTailLock                  
-0     0000077c  memset                       
-0     00000798  putHeadLock                  
-0     000007b0  putStatLock                  
-0     000007c8  putTailLock                  
-0     000007e0  abort                        
-0     000007e8  C$$EXIT                      
+0     0000001c  uartDebug                    
+0     00000150  main                         
+0     00000308  circular_buf_reset           
+0     000003d0  __pruabi_remu                
+0     00000494  GLFSR_init                   
+0     0000054c  circular_buf_space           
+0     000005dc  circular_buf_put             
+0     00000668  GLFSR_next                   
+0     000006e0  __pruabi_lslll               
+0     00000750  circular_buf_next_head       
+0     000007a4  __pruabi_lsrll               
+0     000007f4  memcpy                       
+0     00000828  initSpinLock                 
+0     00000858  initClocks                   
+0     0000087c  getHeadLock                  
+0     0000089c  getStatLock                  
+0     000008bc  getTailLock                  
+0     000008dc  memset                       
+0     000008f8  putHeadLock                  
+0     00000910  putStatLock                  
+0     00000928  putTailLock                  
+0     00000940  abort                        
+0     00000948  C$$EXIT                      
 1     00000000  _stack                       
 1     00000100  __TI_STACK_END               
 1     00000100  glfsr_d0                     
-1     00000118  x                            
-1     0000011c  poly                         
+1     00000118  hostBuffer                   
+1     00000129  x                            
+1     0000012d  poly                         
+1     00000135  uartHandle                   
 2     00026000  CT_CFG                       
 abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
 abs   00000000  __PRU_CREG_PRU_INTC          
@@ -345,4 +358,4 @@ abs   4a100000  __PRU_CREG_BASE_GEMAC
 abs   80000000  __PRU_CREG_BASE_DDR          
 abs   ffffffff  __c_args__                   
 
-[94 symbols]
+[98 symbols]
