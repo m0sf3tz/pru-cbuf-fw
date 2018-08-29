@@ -40,4 +40,11 @@ uartHal.obj: ../uartHal.c $(GEN_OPTS) | $(GEN_HDRS)
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
+uart_irda_cir.obj: ../uart_irda_cir.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: PRU Compiler'
+	"K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/bin/clpru" -v3 --include_path="K:/ccsv8/ccs_base/pru/include" --include_path="C:/Users/Sam2/workspace_v8/for_real" --include_path="K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include" --define=am3358 --define=pru0 -g --diag_warning=225 --diag_wrap=off --display_error_number --endian=little --hardware_mac=on --preproc_with_compile --preproc_dependency="uart_irda_cir.d_raw" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
 

@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.2.1                      
 ******************************************************************************
->> Linked Sun Aug 26 19:37:56 2018
+>> Linked Tue Aug 28 22:32:10 2018
 
 OUTPUT FILE NAME:   <for_real.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000000
@@ -12,10 +12,10 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  00000950  000016b0  RWIX
+  PRU_IMEM              00000000   00002000  000015ac  00000a54  RWIX
 
 PAGE 1:
-  PRU_DMEM_0_1          00000000   00002000  00000139  00001ec7  RWIX
+  PRU_DMEM_0_1          00000000   00002000  00000125  00001edb  RWIX
   PRU_DMEM_1_0          00002000   00002000  00000000  00002000  RWIX
 
 PAGE 2:
@@ -60,44 +60,62 @@ section   page    origin      length       input sections
 *          0    00000000    0000001c     
                   00000000    0000001c     rtspruv3_le.lib : boot.obj (.text:_c_int00_noinit_noargs)
 
-.text      0    0000001c    00000934     
-                  0000001c    00000134     uartHal.obj (.text:uartDebug)
-                  00000150    000000e8     main.obj (.text:main)
-                  00000238    000000d0     cbuf.obj (.text:wrap_around_memput)
-                  00000308    000000c8     cbuf.obj (.text:circular_buf_reset)
-                  000003d0    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
-                  00000494    000000b8     lfsr.obj (.text:GLFSR_init)
-                  0000054c    00000090     cbuf.obj (.text:circular_buf_space)
-                  000005dc    0000008c     cbuf.obj (.text:circular_buf_put)
-                  00000668    00000078     lfsr.obj (.text:GLFSR_next)
-                  000006e0    00000070     rtspruv3_le.lib : lslll.obj (.text:__pruabi_lslll)
-                  00000750    00000054     cbuf.obj (.text:circular_buf_next_head)
-                  000007a4    00000050     rtspruv3_le.lib : lsrll.obj (.text:__pruabi_lsrll)
-                  000007f4    00000034                     : memcpy.obj (.text)
-                  00000828    00000030     main.obj (.text:initSpinLock)
-                  00000858    00000024     main.obj (.text:initClocks)
-                  0000087c    00000020     spinlock.obj (.text:getHeadLock)
-                  0000089c    00000020     spinlock.obj (.text:getStatLock)
-                  000008bc    00000020     spinlock.obj (.text:getTailLock)
-                  000008dc    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
-                  000008f8    00000018     spinlock.obj (.text:putHeadLock)
-                  00000910    00000018     spinlock.obj (.text:putStatLock)
-                  00000928    00000018     spinlock.obj (.text:putTailLock)
-                  00000940    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  00000948    00000008                     : exit.obj (.text:loader_exit)
+.text      0    0000001c    00001590     
+                  0000001c    000003bc     uart_irda_cir.obj (.text:UARTFIFOConfig)
+                  000003d8    00000188     uart_irda_cir.obj (.text:UARTDivisorLatchWrite)
+                  00000560    00000114     rtspruv3_le.lib : divu_c.obj (.text:__pruabi_divu)
+                  00000674    000000e0     uart_irda_cir.obj (.text:UARTTCRTLRBitValRestore)
+                  00000754    000000d8     main.obj (.text:main)
+                  0000082c    000000d4     uart_irda_cir.obj (.text:UARTSubConfigTCRTLRModeEn)
+                  00000900    000000d0     cbuf.obj (.text:wrap_around_memput)
+                  000009d0    000000c8     cbuf.obj (.text:circular_buf_reset)
+                  00000a98    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
+                  00000b5c    000000b8     lfsr.obj (.text:GLFSR_init)
+                  00000c14    000000b0     uart_irda_cir.obj (.text:UARTDivisorValCompute)
+                  00000cc4    00000098     uart_irda_cir.obj (.text:UARTFIFORegisterWrite)
+                  00000d5c    00000094     uart_irda_cir.obj (.text:UARTLineCharacConfig)
+                  00000df0    00000090     cbuf.obj (.text:circular_buf_space)
+                  00000e80    0000008c     cbuf.obj (.text:circular_buf_put)
+                  00000f0c    00000078     uartHal.obj (.text:initHalUart)
+                  00000f84    00000074     uart_irda_cir.obj (.text:UARTEnhanFuncBitValRestore)
+                  00000ff8    00000070     uart_irda_cir.obj (.text:UARTOperatingModeSelect)
+                  00001068    00000070     rtspruv3_le.lib : lslll.obj (.text:__pruabi_lslll)
+                  000010d8    00000068     uart_irda_cir.obj (.text:UARTEnhanFuncEnable)
+                  00001140    00000068     uart_irda_cir.obj (.text:UARTRegConfigModeEnable)
+                  000011a8    00000064     uart_irda_cir.obj (.text:UARTCharPut)
+                  0000120c    00000054     uart_irda_cir.obj (.text:UARTCharsAvail)
+                  00001260    00000054     cbuf.obj (.text:circular_buf_next_head)
+                  000012b4    00000050     rtspruv3_le.lib : lsrll.obj (.text:__pruabi_lsrll)
+                  00001304    0000004c     uart_irda_cir.obj (.text:UARTBreakCtl)
+                  00001350    0000004c     uartHal.obj (.text:UartBaudRateSet)
+                  0000139c    00000038     uartHal.obj (.text:UartFIFOConfigure)
+                  000013d4    00000034     uart_irda_cir.obj (.text:UARTModuleReset)
+                  00001408    00000034     rtspruv3_le.lib : memcpy.obj (.text)
+                  0000143c    00000030     main.obj (.text:initSpinLock)
+                  0000146c    00000028     uart_irda_cir.obj (.text:UARTDivisorLatchDisable)
+                  00001494    00000024     main.obj (.text:initClocks)
+                  000014b8    00000020     uart_irda_cir.obj (.text:UARTFIFOCharGet)
+                  000014d8    00000020     spinlock.obj (.text:getHeadLock)
+                  000014f8    00000020     spinlock.obj (.text:getStatLock)
+                  00001518    00000020     spinlock.obj (.text:getTailLock)
+                  00001538    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
+                  00001554    00000018     spinlock.obj (.text:putHeadLock)
+                  0000156c    00000018     spinlock.obj (.text:putStatLock)
+                  00001584    00000018     spinlock.obj (.text:putTailLock)
+                  0000159c    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  000015a4    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
                   00000004    000000fc     --HOLE--
 
-.bss       1    00000100    0000002d     UNINITIALIZED
+.bss       1    00000100    0000001d     UNINITIALIZED
                   00000100    00000018     (.common:glfsr_d0)
-                  00000118    00000011     (.common:hostBuffer)
-                  00000129    00000004     (.common:x)
+                  00000118    00000004     (.common:x)
+                  0000011c    00000001     (.common:rxByte)
 
-.data      1    0000012d    0000000c     
-                  0000012d    00000008     main.obj (.data)
-                  00000135    00000004     uartHal.obj (.data)
+.data      1    0000011d    00000008     
+                  0000011d    00000008     main.obj (.data)
 
 .cinit     1    00000000    00000000     UNINITIALIZED
 
@@ -116,31 +134,33 @@ section   page    origin      length       input sections
 
 MODULE SUMMARY
 
-       Module         code   ro data   rw data
-       ------         ----   -------   -------
+       Module              code   ro data   rw data
+       ------              ----   -------   -------
     .\
-       cbuf.obj       776    0         68     
-       main.obj       316    0         36     
-       uartHal.obj    308    0         21     
-       lfsr.obj       304    0         0      
-       spinlock.obj   168    0         0      
-    +--+--------------+------+---------+---------+
-       Total:         1872   0         125    
-                                              
+       uart_irda_cir.obj   3080   0         0      
+       cbuf.obj            776    0         68     
+       main.obj            300    0         37     
+       uartHal.obj         252    0         0      
+       lfsr.obj            184    0         0      
+       spinlock.obj        168    0         0      
+    +--+-------------------+------+---------+---------+
+       Total:              4760   0         105    
+                                                   
     K:\ccsv8\tools\compiler\ti-cgt-pru_2.2.1\lib\rtspruv3_le.lib
-       remu_c.obj     196    0         0      
-       lslll.obj      112    0         0      
-       lsrll.obj      80     0         0      
-       memcpy.obj     52     0         0      
-       boot.obj       28     0         0      
-       memset.obj     28     0         0      
-       exit.obj       16     0         0      
-    +--+--------------+------+---------+---------+
-       Total:         512    0         0      
-                                              
-       Stack:         0      0         256    
-    +--+--------------+------+---------+---------+
-       Grand Total:   2384   0         381    
+       divu_c.obj          276    0         0      
+       remu_c.obj          196    0         0      
+       lslll.obj           112    0         0      
+       lsrll.obj           80     0         0      
+       memcpy.obj          52     0         0      
+       boot.obj            28     0         0      
+       memset.obj          28     0         0      
+       exit.obj            16     0         0      
+    +--+-------------------+------+---------+---------+
+       Total:              788    0         0      
+                                                   
+       Stack:              0      0         256    
+    +--+-------------------+------+---------+---------+
+       Grand Total:        5548   0         361    
 
 
 SEGMENT ATTRIBUTES
@@ -155,10 +175,26 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                         
 ----  -------   ----                         
-0     00000948  C$$EXIT                      
+0     000015a4  C$$EXIT                      
 2     00026000  CT_CFG                       
-0     00000494  GLFSR_init                   
-0     00000668  GLFSR_next                   
+0     00000b5c  GLFSR_init                   
+0     00001304  UARTBreakCtl                 
+0     000011a8  UARTCharPut                  
+0     0000120c  UARTCharsAvail               
+0     0000146c  UARTDivisorLatchDisable      
+0     000003d8  UARTDivisorLatchWrite        
+0     00000c14  UARTDivisorValCompute        
+0     00000f84  UARTEnhanFuncBitValRestore   
+0     000010d8  UARTEnhanFuncEnable          
+0     000014b8  UARTFIFOCharGet              
+0     0000001c  UARTFIFOConfig               
+0     00000cc4  UARTFIFORegisterWrite        
+0     00000d5c  UARTLineCharacConfig         
+0     000013d4  UARTModuleReset              
+0     00000ff8  UARTOperatingModeSelect      
+0     00001140  UARTRegConfigModeEnable      
+0     0000082c  UARTSubConfigTCRTLRModeEn    
+0     00000674  UARTTCRTLRBitValRestore      
 abs   481cc000  __PRU_CREG_BASE_DCAN0        
 abs   481d0000  __PRU_CREG_BASE_DCAN1        
 abs   80000000  __PRU_CREG_BASE_DDR          
@@ -226,33 +262,33 @@ abs   0000000c  __PRU_CREG_UART2
 1     00000100  __TI_STACK_END               
 abs   00000100  __TI_STACK_SIZE              
 abs   ffffffff  __c_args__                   
-0     000006e0  __pruabi_lslll               
-0     000007a4  __pruabi_lsrll               
-0     000003d0  __pruabi_remu                
+0     00000560  __pruabi_divu                
+0     00001068  __pruabi_lslll               
+0     000012b4  __pruabi_lsrll               
+0     00000a98  __pruabi_remu                
 0     00000000  _c_int00_noinit_noargs       
 1     00000000  _stack                       
-0     00000940  abort                        
-0     00000750  circular_buf_next_head       
-0     000005dc  circular_buf_put             
-0     00000308  circular_buf_reset           
-0     0000054c  circular_buf_space           
-0     0000087c  getHeadLock                  
-0     0000089c  getStatLock                  
-0     000008bc  getTailLock                  
+0     0000159c  abort                        
+0     00001260  circular_buf_next_head       
+0     00000e80  circular_buf_put             
+0     000009d0  circular_buf_reset           
+0     00000df0  circular_buf_space           
+0     000014d8  getHeadLock                  
+0     000014f8  getStatLock                  
+0     00001518  getTailLock                  
 1     00000100  glfsr_d0                     
-1     00000118  hostBuffer                   
-0     00000858  initClocks                   
-0     00000828  initSpinLock                 
-0     00000150  main                         
-0     000007f4  memcpy                       
-0     000008dc  memset                       
-1     0000012d  poly                         
-0     000008f8  putHeadLock                  
-0     00000910  putStatLock                  
-0     00000928  putTailLock                  
-0     0000001c  uartDebug                    
-1     00000135  uartHandle                   
-1     00000129  x                            
+0     00001494  initClocks                   
+0     00000f0c  initHalUart                  
+0     0000143c  initSpinLock                 
+0     00000754  main                         
+0     00001408  memcpy                       
+0     00001538  memset                       
+1     0000011d  poly                         
+0     00001554  putHeadLock                  
+0     0000156c  putStatLock                  
+0     00001584  putTailLock                  
+1     0000011c  rxByte                       
+1     00000118  x                            
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -260,36 +296,52 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 page  address   name                         
 ----  -------   ----                         
 0     00000000  _c_int00_noinit_noargs       
-0     0000001c  uartDebug                    
-0     00000150  main                         
-0     00000308  circular_buf_reset           
-0     000003d0  __pruabi_remu                
-0     00000494  GLFSR_init                   
-0     0000054c  circular_buf_space           
-0     000005dc  circular_buf_put             
-0     00000668  GLFSR_next                   
-0     000006e0  __pruabi_lslll               
-0     00000750  circular_buf_next_head       
-0     000007a4  __pruabi_lsrll               
-0     000007f4  memcpy                       
-0     00000828  initSpinLock                 
-0     00000858  initClocks                   
-0     0000087c  getHeadLock                  
-0     0000089c  getStatLock                  
-0     000008bc  getTailLock                  
-0     000008dc  memset                       
-0     000008f8  putHeadLock                  
-0     00000910  putStatLock                  
-0     00000928  putTailLock                  
-0     00000940  abort                        
-0     00000948  C$$EXIT                      
+0     0000001c  UARTFIFOConfig               
+0     000003d8  UARTDivisorLatchWrite        
+0     00000560  __pruabi_divu                
+0     00000674  UARTTCRTLRBitValRestore      
+0     00000754  main                         
+0     0000082c  UARTSubConfigTCRTLRModeEn    
+0     000009d0  circular_buf_reset           
+0     00000a98  __pruabi_remu                
+0     00000b5c  GLFSR_init                   
+0     00000c14  UARTDivisorValCompute        
+0     00000cc4  UARTFIFORegisterWrite        
+0     00000d5c  UARTLineCharacConfig         
+0     00000df0  circular_buf_space           
+0     00000e80  circular_buf_put             
+0     00000f0c  initHalUart                  
+0     00000f84  UARTEnhanFuncBitValRestore   
+0     00000ff8  UARTOperatingModeSelect      
+0     00001068  __pruabi_lslll               
+0     000010d8  UARTEnhanFuncEnable          
+0     00001140  UARTRegConfigModeEnable      
+0     000011a8  UARTCharPut                  
+0     0000120c  UARTCharsAvail               
+0     00001260  circular_buf_next_head       
+0     000012b4  __pruabi_lsrll               
+0     00001304  UARTBreakCtl                 
+0     000013d4  UARTModuleReset              
+0     00001408  memcpy                       
+0     0000143c  initSpinLock                 
+0     0000146c  UARTDivisorLatchDisable      
+0     00001494  initClocks                   
+0     000014b8  UARTFIFOCharGet              
+0     000014d8  getHeadLock                  
+0     000014f8  getStatLock                  
+0     00001518  getTailLock                  
+0     00001538  memset                       
+0     00001554  putHeadLock                  
+0     0000156c  putStatLock                  
+0     00001584  putTailLock                  
+0     0000159c  abort                        
+0     000015a4  C$$EXIT                      
 1     00000000  _stack                       
 1     00000100  __TI_STACK_END               
 1     00000100  glfsr_d0                     
-1     00000118  hostBuffer                   
-1     00000129  x                            
-1     0000012d  poly                         
-1     00000135  uartHandle                   
+1     00000118  x                            
+1     0000011c  rxByte                       
+1     0000011d  poly                         
 2     00026000  CT_CFG                       
 abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
 abs   00000000  __PRU_CREG_PRU_INTC          
@@ -358,4 +410,4 @@ abs   4a100000  __PRU_CREG_BASE_GEMAC
 abs   80000000  __PRU_CREG_BASE_DDR          
 abs   ffffffff  __c_args__                   
 
-[98 symbols]
+[114 symbols]

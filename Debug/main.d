@@ -19,12 +19,15 @@ main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__cstring.h
 main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/string.h
 main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__epilog.h
 main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__config_compat_post.h
+main.obj: K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/stdbool.h
 main.obj: ../spinlock.h
 main.obj: ../sharedVariables.h
 main.obj: ../cbuf.h
 main.obj: ../lfsr.h
 main.obj: ../uartHal.h
 main.obj: ../registerOffsets.h
+main.obj: ../uart_irda_cir.h
+main.obj: ../hw_uart_irda_cir.h
 
 ../main.c: 
 K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/stdint.h: 
@@ -45,9 +48,12 @@ K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__cstring.h:
 K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/string.h: 
 K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__epilog.h: 
 K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/s__config_compat_post.h: 
+K:/ccsv8/tools/compiler/ti-cgt-pru_2.2.1/include/stdbool.h: 
 ../spinlock.h: 
 ../sharedVariables.h: 
 ../cbuf.h: 
 ../lfsr.h: 
 ../uartHal.h: 
 ../registerOffsets.h: 
+../uart_irda_cir.h: 
+../hw_uart_irda_cir.h: 

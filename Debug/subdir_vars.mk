@@ -13,41 +13,47 @@ C_SRCS += \
 ../lfsr.c \
 ../main.c \
 ../spinlock.c \
-../uartHal.c 
+../uartHal.c \
+../uart_irda_cir.c 
 
 C_DEPS += \
 ./cbuf.d \
 ./lfsr.d \
 ./main.d \
 ./spinlock.d \
-./uartHal.d 
+./uartHal.d \
+./uart_irda_cir.d 
 
 OBJS += \
 ./cbuf.obj \
 ./lfsr.obj \
 ./main.obj \
 ./spinlock.obj \
-./uartHal.obj 
+./uartHal.obj \
+./uart_irda_cir.obj 
 
 OBJS__QUOTED += \
 "cbuf.obj" \
 "lfsr.obj" \
 "main.obj" \
 "spinlock.obj" \
-"uartHal.obj" 
+"uartHal.obj" \
+"uart_irda_cir.obj" 
 
 C_DEPS__QUOTED += \
 "cbuf.d" \
 "lfsr.d" \
 "main.d" \
 "spinlock.d" \
-"uartHal.d" 
+"uartHal.d" \
+"uart_irda_cir.d" 
 
 C_SRCS__QUOTED += \
 "../cbuf.c" \
 "../lfsr.c" \
 "../main.c" \
 "../spinlock.c" \
-"../uartHal.c" 
+"../uartHal.c" \
+"../uart_irda_cir.c" 
 
 
