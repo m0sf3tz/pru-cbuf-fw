@@ -37,6 +37,8 @@ char rxByte;
 void main(void)
 {
 
+    int x;// = 0xdeadbeef;
+
     /* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
