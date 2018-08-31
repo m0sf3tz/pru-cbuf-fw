@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.2.1                      
 ******************************************************************************
->> Linked Fri Aug 31 04:27:22 2018
+>> Linked Fri Aug 31 04:52:43 2018
 
 OUTPUT FILE NAME:   <for_real.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000000
@@ -12,10 +12,10 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  00001440  00000bc0  RWIX
+  PRU_IMEM              00000000   00002000  0000022c  00001dd4  RWIX
 
 PAGE 1:
-  PRU_DMEM_0_1          00000000   00002000  00000105  00001efb  RWIX
+  PRU_DMEM_0_1          00000000   00002000  00000100  00001f00  RWIX
   PRU_DMEM_1_0          00002000   00002000  00000000  00002000  RWIX
 
 PAGE 2:
@@ -60,55 +60,21 @@ section   page    origin      length       input sections
 *          0    00000000    0000001c     
                   00000000    0000001c     rtspruv3_le.lib : boot.obj (.text:_c_int00_noinit_noargs)
 
-.text      0    0000001c    00001424     
-                  0000001c    000003bc     uart_irda_cir.obj (.text:UARTFIFOConfig)
-                  000003d8    00000188     uart_irda_cir.obj (.text:UARTDivisorLatchWrite)
-                  00000560    00000114     rtspruv3_le.lib : divu_c.obj (.text:__pruabi_divu)
-                  00000674    000000e4     main.obj (.text:main)
-                  00000758    000000e0     uart_irda_cir.obj (.text:UARTTCRTLRBitValRestore)
-                  00000838    000000d4     uart_irda_cir.obj (.text:UARTSubConfigTCRTLRModeEn)
-                  0000090c    000000d0     cbuf.obj (.text:wrap_around_memput)
-                  000009dc    000000c8     cbuf.obj (.text:circular_buf_reset)
-                  00000aa4    000000c4     rtspruv3_le.lib : remu_c.obj (.text:__pruabi_remu)
-                  00000b68    000000b0     uart_irda_cir.obj (.text:UARTDivisorValCompute)
-                  00000c18    00000098     uart_irda_cir.obj (.text:UARTFIFORegisterWrite)
-                  00000cb0    00000094     uart_irda_cir.obj (.text:UARTLineCharacConfig)
-                  00000d44    00000090     cbuf.obj (.text:circular_buf_space)
-                  00000dd4    0000008c     cbuf.obj (.text:circular_buf_put)
-                  00000e60    00000078     uartHal.obj (.text:initHalUart)
-                  00000ed8    00000074     uart_irda_cir.obj (.text:UARTEnhanFuncBitValRestore)
-                  00000f4c    00000070     uart_irda_cir.obj (.text:UARTOperatingModeSelect)
-                  00000fbc    00000068     uart_irda_cir.obj (.text:UARTEnhanFuncEnable)
-                  00001024    00000068     uart_irda_cir.obj (.text:UARTRegConfigModeEnable)
-                  0000108c    00000064     uart_irda_cir.obj (.text:UARTCharPut)
-                  000010f0    00000054     uart_irda_cir.obj (.text:UARTCharsAvail)
-                  00001144    00000054     cbuf.obj (.text:circular_buf_next_head)
-                  00001198    0000004c     uart_irda_cir.obj (.text:UARTBreakCtl)
-                  000011e4    0000004c     uartHal.obj (.text:UartBaudRateSet)
-                  00001230    00000038     uartHal.obj (.text:UartFIFOConfigure)
-                  00001268    00000034     uart_irda_cir.obj (.text:UARTModuleReset)
-                  0000129c    00000034     rtspruv3_le.lib : memcpy.obj (.text)
-                  000012d0    00000030     main.obj (.text:initSpinLock)
-                  00001300    00000028     uart_irda_cir.obj (.text:UARTDivisorLatchDisable)
-                  00001328    00000024     main.obj (.text:initClocks)
-                  0000134c    00000020     uart_irda_cir.obj (.text:UARTFIFOCharGet)
-                  0000136c    00000020     spinlock.obj (.text:getHeadLock)
-                  0000138c    00000020     spinlock.obj (.text:getStatLock)
-                  000013ac    00000020     spinlock.obj (.text:getTailLock)
-                  000013cc    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
-                  000013e8    00000018     spinlock.obj (.text:putHeadLock)
-                  00001400    00000018     spinlock.obj (.text:putStatLock)
-                  00001418    00000018     spinlock.obj (.text:putTailLock)
-                  00001430    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  00001438    00000008                     : exit.obj (.text:loader_exit)
+.text      0    0000001c    00000210     
+                  0000001c    000000c8     cbuf.obj (.text:circular_buf_reset)
+                  000000e4    00000078     main.obj (.text:main)
+                  0000015c    00000030     main.obj (.text:initSpinLock)
+                  0000018c    00000024     main.obj (.text:initClocks)
+                  000001b0    00000020     spinlock.obj (.text:getHeadLock)
+                  000001d0    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
+                  000001ec    00000018     spinlock.obj (.text:putHeadLock)
+                  00000204    00000018     spinlock.obj (.text:putTailLock)
+                  0000021c    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  00000224    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
                   00000004    000000fc     --HOLE--
-
-.bss       1    00000100    00000005     UNINITIALIZED
-                  00000100    00000004     (.common:x)
-                  00000104    00000001     (.common:rxByte)
 
 .cinit     1    00000000    00000000     UNINITIALIZED
 
@@ -127,30 +93,25 @@ section   page    origin      length       input sections
 
 MODULE SUMMARY
 
-       Module              code   ro data   rw data
-       ------              ----   -------   -------
+       Module         code   ro data   rw data
+       ------         ----   -------   -------
     .\
-       uart_irda_cir.obj   3080   0         0      
-       cbuf.obj            776    0         68     
-       main.obj            312    0         5      
-       uartHal.obj         252    0         0      
-       spinlock.obj        168    0         0      
-    +--+-------------------+------+---------+---------+
-       Total:              4588   0         73     
-                                                   
+       cbuf.obj       200    0         68     
+       main.obj       204    0         0      
+       spinlock.obj   80     0         0      
+    +--+--------------+------+---------+---------+
+       Total:         484    0         68     
+                                              
     K:\ccsv8\tools\compiler\ti-cgt-pru_2.2.1\lib\rtspruv3_le.lib
-       divu_c.obj          276    0         0      
-       remu_c.obj          196    0         0      
-       memcpy.obj          52     0         0      
-       boot.obj            28     0         0      
-       memset.obj          28     0         0      
-       exit.obj            16     0         0      
-    +--+-------------------+------+---------+---------+
-       Total:              596    0         0      
-                                                   
-       Stack:              0      0         256    
-    +--+-------------------+------+---------+---------+
-       Grand Total:        5184   0         329    
+       boot.obj       28     0         0      
+       memset.obj     28     0         0      
+       exit.obj       16     0         0      
+    +--+--------------+------+---------+---------+
+       Total:         72     0         0      
+                                              
+       Stack:         0      0         256    
+    +--+--------------+------+---------+---------+
+       Grand Total:   556    0         324    
 
 
 SEGMENT ATTRIBUTES
@@ -164,25 +125,8 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                         
 ----  -------   ----                         
-0     00001438  C$$EXIT                      
+0     00000224  C$$EXIT                      
 2     00026000  CT_CFG                       
-0     00001198  UARTBreakCtl                 
-0     0000108c  UARTCharPut                  
-0     000010f0  UARTCharsAvail               
-0     00001300  UARTDivisorLatchDisable      
-0     000003d8  UARTDivisorLatchWrite        
-0     00000b68  UARTDivisorValCompute        
-0     00000ed8  UARTEnhanFuncBitValRestore   
-0     00000fbc  UARTEnhanFuncEnable          
-0     0000134c  UARTFIFOCharGet              
-0     0000001c  UARTFIFOConfig               
-0     00000c18  UARTFIFORegisterWrite        
-0     00000cb0  UARTLineCharacConfig         
-0     00001268  UARTModuleReset              
-0     00000f4c  UARTOperatingModeSelect      
-0     00001024  UARTRegConfigModeEnable      
-0     00000838  UARTSubConfigTCRTLRModeEn    
-0     00000758  UARTTCRTLRBitValRestore      
 abs   481cc000  __PRU_CREG_BASE_DCAN0        
 abs   481d0000  __PRU_CREG_BASE_DCAN1        
 abs   80000000  __PRU_CREG_BASE_DDR          
@@ -250,29 +194,17 @@ abs   0000000c  __PRU_CREG_UART2
 1     00000100  __TI_STACK_END               
 abs   00000100  __TI_STACK_SIZE              
 abs   ffffffff  __c_args__                   
-0     00000560  __pruabi_divu                
-0     00000aa4  __pruabi_remu                
 0     00000000  _c_int00_noinit_noargs       
 1     00000000  _stack                       
-0     00001430  abort                        
-0     00001144  circular_buf_next_head       
-0     00000dd4  circular_buf_put             
-0     000009dc  circular_buf_reset           
-0     00000d44  circular_buf_space           
-0     0000136c  getHeadLock                  
-0     0000138c  getStatLock                  
-0     000013ac  getTailLock                  
-0     00001328  initClocks                   
-0     00000e60  initHalUart                  
-0     000012d0  initSpinLock                 
-0     00000674  main                         
-0     0000129c  memcpy                       
-0     000013cc  memset                       
-0     000013e8  putHeadLock                  
-0     00001400  putStatLock                  
-0     00001418  putTailLock                  
-1     00000104  rxByte                       
-1     00000100  x                            
+0     0000021c  abort                        
+0     0000001c  circular_buf_reset           
+0     000001b0  getHeadLock                  
+0     0000018c  initClocks                   
+0     0000015c  initSpinLock                 
+0     000000e4  main                         
+0     000001d0  memset                       
+0     000001ec  putHeadLock                  
+0     00000204  putTailLock                  
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -280,47 +212,18 @@ GLOBAL SYMBOLS: SORTED BY Symbol Address
 page  address   name                         
 ----  -------   ----                         
 0     00000000  _c_int00_noinit_noargs       
-0     0000001c  UARTFIFOConfig               
-0     000003d8  UARTDivisorLatchWrite        
-0     00000560  __pruabi_divu                
-0     00000674  main                         
-0     00000758  UARTTCRTLRBitValRestore      
-0     00000838  UARTSubConfigTCRTLRModeEn    
-0     000009dc  circular_buf_reset           
-0     00000aa4  __pruabi_remu                
-0     00000b68  UARTDivisorValCompute        
-0     00000c18  UARTFIFORegisterWrite        
-0     00000cb0  UARTLineCharacConfig         
-0     00000d44  circular_buf_space           
-0     00000dd4  circular_buf_put             
-0     00000e60  initHalUart                  
-0     00000ed8  UARTEnhanFuncBitValRestore   
-0     00000f4c  UARTOperatingModeSelect      
-0     00000fbc  UARTEnhanFuncEnable          
-0     00001024  UARTRegConfigModeEnable      
-0     0000108c  UARTCharPut                  
-0     000010f0  UARTCharsAvail               
-0     00001144  circular_buf_next_head       
-0     00001198  UARTBreakCtl                 
-0     00001268  UARTModuleReset              
-0     0000129c  memcpy                       
-0     000012d0  initSpinLock                 
-0     00001300  UARTDivisorLatchDisable      
-0     00001328  initClocks                   
-0     0000134c  UARTFIFOCharGet              
-0     0000136c  getHeadLock                  
-0     0000138c  getStatLock                  
-0     000013ac  getTailLock                  
-0     000013cc  memset                       
-0     000013e8  putHeadLock                  
-0     00001400  putStatLock                  
-0     00001418  putTailLock                  
-0     00001430  abort                        
-0     00001438  C$$EXIT                      
+0     0000001c  circular_buf_reset           
+0     000000e4  main                         
+0     0000015c  initSpinLock                 
+0     0000018c  initClocks                   
+0     000001b0  getHeadLock                  
+0     000001d0  memset                       
+0     000001ec  putHeadLock                  
+0     00000204  putTailLock                  
+0     0000021c  abort                        
+0     00000224  C$$EXIT                      
 1     00000000  _stack                       
 1     00000100  __TI_STACK_END               
-1     00000100  x                            
-1     00000104  rxByte                       
 2     00026000  CT_CFG                       
 abs   00000000  __PRU_CREG_BASE_PRU_DMEM_0_1 
 abs   00000000  __PRU_CREG_PRU_INTC          
@@ -389,4 +292,4 @@ abs   4a100000  __PRU_CREG_BASE_GEMAC
 abs   80000000  __PRU_CREG_BASE_DDR          
 abs   ffffffff  __c_args__                   
 
-[109 symbols]
+[80 symbols]

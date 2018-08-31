@@ -22,10 +22,6 @@ void initSpinLock(){
     putTailLock();
 }
 
-int x;
-lfsr_t glfsr_d0;
-uint64_t poly = 0x1081;
-char rxByte;
 
 void initClocks()
 {
@@ -36,11 +32,11 @@ void initClocks()
     *(volatile uint32_t*)(CLOCK_CTRL_BASE + UART2_CLK_CTRL_OFFSET   ) = ENABLE_CLOCK;
 }
 
+char rxByte;
+
 void main(void)
 {
 
-
-    x = 0;
     /* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
 
@@ -58,7 +54,7 @@ void main(void)
 
 
     //Initialize the UART
-    initHalUart();
+    //initHalUart();
 
     circular_buf_t         buf0;
     circular_buf_stats_t   stat;
@@ -66,6 +62,10 @@ void main(void)
 
     *(uint32_t*)(0x90000000) = 0x1234002;
 
+    while(1)
+    {
+
+    }
 
     while(1)
     {
