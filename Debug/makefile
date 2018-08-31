@@ -15,6 +15,7 @@ ORDERED_OBJS += \
 "./main.obj" \
 "./spinlock.obj" \
 "./uartHal.obj" \
+"./uart_irda_cir.obj" \
 "../AM335x_PRU.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -158,8 +159,8 @@ for_real.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "cbuf.obj" "lfsr.obj" "main.obj" "spinlock.obj" "uartHal.obj" 
-	-$(RM) "cbuf.d" "lfsr.d" "main.d" "spinlock.d" "uartHal.d" 
+	-$(RM) "cbuf.obj" "lfsr.obj" "main.obj" "spinlock.obj" "uartHal.obj" "uart_irda_cir.obj" 
+	-$(RM) "cbuf.d" "lfsr.d" "main.d" "spinlock.d" "uartHal.d" "uart_irda_cir.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

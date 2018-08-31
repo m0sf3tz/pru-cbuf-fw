@@ -131,19 +131,6 @@ void initHalUart()
     /* Switching to UART16x operating mode. */
     UARTOperatingModeSelect(SOC_UART_2_REGS, UART16x_OPER_MODE);
 
-/*
-    char rxByte;
-
-    while(1)
-    {
-        while(TRUE == UARTCharsAvail(SOC_UART_2_REGS))
-        {
-            rxByte = UARTFIFOCharGet(SOC_UART_2_REGS);
-            UARTFIFOCharPut(SOC_UART_2_REGS, rxByte);
-        }
-    }
-*/
-
 }
 
 /*

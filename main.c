@@ -12,8 +12,6 @@
 #include "registerOffsets.h"
 #include "uart_irda_cir.h"
 
-#define PRU_LOCK_OFFSET 0x480CA800
-#define ARM_LOCK_OFFSET  0x480CA804
 
 circular_buf_stats_t bufStat;
 
@@ -57,6 +55,9 @@ void main(void)
     circular_buf_t         buf0;
     circular_buf_stats_t   stat;
     circular_buf_reset(&buf0, (uint32_t*)SHBUF0_START, SHBUF0_SIZE, &stat,(uint32_t*)SHBUF0_HEAD_OFFSET,(uint32_t*)SHBUF0_TAIL_OFFSET);
+
+
+    *(uint32_t*)(0x90000000) = 0x1234000;
 
     while(1)
     {
