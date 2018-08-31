@@ -56,7 +56,7 @@ void main(void)
 
 
     //Initialize the UART
-    //initHalUart();
+    initHalUart();
 
     circular_buf_t         buf0;
     circular_buf_stats_t   stat;
