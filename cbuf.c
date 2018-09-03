@@ -164,6 +164,10 @@ int circular_buf_get(circular_buf_t * cbuf, char * dest, size_t len)
 {
     int ret = -1;
 
+    //tried to get stuff from an emtpy buf
+    if(circular_buf_space(cbuf) == cbuf->size)
+        return ret;
+
     uint32_t size = cbuf->size - circular_buf_space(cbuf) - 1;
 
     if(len > size)
