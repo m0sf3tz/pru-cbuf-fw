@@ -77,4 +77,14 @@ void main(void)
        }
     }
 
+
+    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
+    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
+    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
+    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
+    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
+
+
+    circular_buf_get(&buf0, (char*)&rxByte,  8);
+
 }

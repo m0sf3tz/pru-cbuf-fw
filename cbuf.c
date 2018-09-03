@@ -139,9 +139,13 @@ void circular_buf_next_tail(circular_buf_t * cbuf, uint32_t get)
 }
 #endif
 
+
+//will return 0 if we tried to put too much into the buffer (this would be destructive)
+//else, will return how much we wrote into the buffer.
+
 int circular_buf_put(circular_buf_t * cbuf, char * src, size_t len)
 {
-    int ret = -1;
+    int ret = 0;
 
     uint32_t size = circular_buf_space(cbuf);
 
@@ -156,13 +160,14 @@ int circular_buf_put(circular_buf_t * cbuf, char * src, size_t len)
 
     circular_buf_next_head(cbuf, len);
 
-    return 1;
+    return len;
 }
 
+//returns how much we read, will return 0 if we attempt to read an emtpy buffer
 #if DEBUG_MODE  //should only be called from the ARMv7
 int circular_buf_get(circular_buf_t * cbuf, char * dest, size_t len)
 {
-    int ret = -1;
+    int ret = 0;
 
     //tried to get stuff from an emtpy buf
     if(circular_buf_space(cbuf) == cbuf->size)
@@ -171,12 +176,12 @@ int circular_buf_get(circular_buf_t * cbuf, char * dest, size_t len)
     uint32_t size = cbuf->size - circular_buf_space(cbuf) - 1;
 
     if(len > size)
-        return ret;
+        len = size;
 
     wrap_around_memget(cbuf, dest, len);
 
     circular_buf_next_tail(cbuf, len);
 
-    return 1;
+    return len;
 }
 #endif
