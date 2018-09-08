@@ -61,7 +61,7 @@ void main(void)
     volatile int z = 0;
 
 
-    while(z!= 340343434)
+    while(true)
     {
 
        if(true == UARTCharsAvail(UART2_OFFSET_BLOCK_START))
@@ -72,6 +72,4 @@ void main(void)
        }
 
     }
-    clearBufferUsed(0);
-
 }

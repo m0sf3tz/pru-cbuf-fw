@@ -1,7 +1,7 @@
 ******************************************************************************
                      PRU Linker PC v2.2.1                      
 ******************************************************************************
->> Linked Sat Sep  8 15:48:39 2018
+>> Linked Sat Sep  8 15:57:53 2018
 
 OUTPUT FILE NAME:   <for_real.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs"  address: 00000000
@@ -12,7 +12,7 @@ MEMORY CONFIGURATION
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
-  PRU_IMEM              00000000   00002000  000013d0  00000c30  RWIX
+  PRU_IMEM              00000000   00002000  00001350  00000cb0  RWIX
 
 PAGE 1:
   PRU_DMEM_0_1          00000000   00002000  0000010d  00001ef3  RWIX
@@ -60,7 +60,7 @@ section   page    origin      length       input sections
 *          0    00000000    0000001c     
                   00000000    0000001c     rtspruv3_le.lib : boot.obj (.text:_c_int00_noinit_noargs)
 
-.text      0    0000001c    000013b4     
+.text      0    0000001c    00001334     
                   0000001c    000003bc     uart_irda_cir.obj (.text:UARTFIFOConfig)
                   000003d8    00000188     uart_irda_cir.obj (.text:UARTDivisorLatchWrite)
                   00000560    00000148     buffApp.obj (.text:processIncomingData)
@@ -68,38 +68,37 @@ section   page    origin      length       input sections
                   000007bc    000000e0     uart_irda_cir.obj (.text:UARTTCRTLRBitValRestore)
                   0000089c    000000d4     uart_irda_cir.obj (.text:UARTSubConfigTCRTLRModeEn)
                   00000970    000000b0     uart_irda_cir.obj (.text:UARTDivisorValCompute)
-                  00000a20    0000009c     main.obj (.text:main)
-                  00000abc    0000009c     shiftParser.obj (.text:searchForMagicBytes)
-                  00000b58    00000098     uart_irda_cir.obj (.text:UARTFIFORegisterWrite)
-                  00000bf0    00000098     shbuf.obj (.text:getFreeBuffer)
-                  00000c88    00000094     uart_irda_cir.obj (.text:UARTLineCharacConfig)
-                  00000d1c    00000078     uartHal.obj (.text:initHalUart)
-                  00000d94    00000074     uart_irda_cir.obj (.text:UARTEnhanFuncBitValRestore)
-                  00000e08    00000070     uart_irda_cir.obj (.text:UARTOperatingModeSelect)
-                  00000e78    00000068     uart_irda_cir.obj (.text:UARTEnhanFuncEnable)
-                  00000ee0    00000068     uart_irda_cir.obj (.text:UARTRegConfigModeEnable)
-                  00000f48    00000068     shbuf.obj (.text:initSharedBuffs)
-                  00000fb0    00000064     shbuf.obj (.text:putBuff)
-                  00001014    00000058     shbuf.obj (.text:clearBufferUsed)
-                  0000106c    00000058     shbuf.obj (.text:setBufferUsed)
-                  000010c4    00000054     uart_irda_cir.obj (.text:UARTCharsAvail)
-                  00001118    00000054     shiftParser.obj (.text:shiftIn)
-                  0000116c    0000004c     uart_irda_cir.obj (.text:UARTBreakCtl)
-                  000011b8    0000004c     uartHal.obj (.text:UartBaudRateSet)
-                  00001204    00000038     uartHal.obj (.text:UartFIFOConfigure)
-                  0000123c    00000034     uart_irda_cir.obj (.text:UARTModuleReset)
-                  00001270    0000002c     main.obj (.text:initClocks)
-                  0000129c    0000002c     buffApp.obj (.text:initRxDigestor)
-                  000012c8    00000028     uart_irda_cir.obj (.text:UARTDivisorLatchDisable)
-                  000012f0    00000024     shiftParser.obj (.text:initShiftParser)
-                  00001314    00000020     uart_irda_cir.obj (.text:UARTFIFOCharGet)
-                  00001334    00000020     spinlock.obj (.text:getBuffLock)
-                  00001354    00000020     shiftParser.obj (.text:shiftInRxAndSearchForMagicKeys)
-                  00001374    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
-                  00001390    00000018     spinlock.obj (.text:initSpinLock)
-                  000013a8    00000018     spinlock.obj (.text:putBuffLock)
-                  000013c0    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
-                  000013c8    00000008                     : exit.obj (.text:loader_exit)
+                  00000a20    0000009c     shiftParser.obj (.text:searchForMagicBytes)
+                  00000abc    00000098     uart_irda_cir.obj (.text:UARTFIFORegisterWrite)
+                  00000b54    00000098     shbuf.obj (.text:getFreeBuffer)
+                  00000bec    00000094     uart_irda_cir.obj (.text:UARTLineCharacConfig)
+                  00000c80    00000078     uartHal.obj (.text:initHalUart)
+                  00000cf8    00000074     uart_irda_cir.obj (.text:UARTEnhanFuncBitValRestore)
+                  00000d6c    00000074     main.obj (.text:main)
+                  00000de0    00000070     uart_irda_cir.obj (.text:UARTOperatingModeSelect)
+                  00000e50    00000068     uart_irda_cir.obj (.text:UARTEnhanFuncEnable)
+                  00000eb8    00000068     uart_irda_cir.obj (.text:UARTRegConfigModeEnable)
+                  00000f20    00000068     shbuf.obj (.text:initSharedBuffs)
+                  00000f88    00000064     shbuf.obj (.text:putBuff)
+                  00000fec    00000058     shbuf.obj (.text:setBufferUsed)
+                  00001044    00000054     uart_irda_cir.obj (.text:UARTCharsAvail)
+                  00001098    00000054     shiftParser.obj (.text:shiftIn)
+                  000010ec    0000004c     uart_irda_cir.obj (.text:UARTBreakCtl)
+                  00001138    0000004c     uartHal.obj (.text:UartBaudRateSet)
+                  00001184    00000038     uartHal.obj (.text:UartFIFOConfigure)
+                  000011bc    00000034     uart_irda_cir.obj (.text:UARTModuleReset)
+                  000011f0    0000002c     main.obj (.text:initClocks)
+                  0000121c    0000002c     buffApp.obj (.text:initRxDigestor)
+                  00001248    00000028     uart_irda_cir.obj (.text:UARTDivisorLatchDisable)
+                  00001270    00000024     shiftParser.obj (.text:initShiftParser)
+                  00001294    00000020     uart_irda_cir.obj (.text:UARTFIFOCharGet)
+                  000012b4    00000020     spinlock.obj (.text:getBuffLock)
+                  000012d4    00000020     shiftParser.obj (.text:shiftInRxAndSearchForMagicKeys)
+                  000012f4    0000001c     rtspruv3_le.lib : memset.obj (.text:memset)
+                  00001310    00000018     spinlock.obj (.text:initSpinLock)
+                  00001328    00000018     spinlock.obj (.text:putBuffLock)
+                  00001340    00000008     rtspruv3_le.lib : exit.obj (.text:abort)
+                  00001348    00000008                     : exit.obj (.text:loader_exit)
 
 .stack     1    00000000    00000100     UNINITIALIZED
                   00000000    00000004     rtspruv3_le.lib : boot.obj (.stack)
@@ -133,14 +132,14 @@ MODULE SUMMARY
        ------              ----   -------   -------
     .\
        uart_irda_cir.obj   2980   0         0      
-       shbuf.obj           532    0         0      
        buffApp.obj         372    0         74     
+       shbuf.obj           444    0         0      
        shiftParser.obj     308    0         6      
        uartHal.obj         252    0         0      
-       main.obj            200    0         1      
+       main.obj            160    0         1      
        spinlock.obj        80     0         0      
     +--+-------------------+------+---------+---------+
-       Total:              4724   0         81     
+       Total:              4596   0         81     
                                                    
     K:\ccsv8\tools\compiler\ti-cgt-pru_2.2.1\lib\rtspruv3_le.lib
        divu_c.obj          276    0         0      
@@ -152,7 +151,7 @@ MODULE SUMMARY
                                                    
        Stack:              0      0         256    
     +--+-------------------+------+---------+---------+
-       Grand Total:        5072   0         337    
+       Grand Total:        4944   0         337    
 
 
 SEGMENT ATTRIBUTES
@@ -166,22 +165,22 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 page  address   name                          
 ----  -------   ----                          
-0     000013c8  C$$EXIT                       
+0     00001348  C$$EXIT                       
 2     00026000  CT_CFG                        
-0     0000116c  UARTBreakCtl                  
-0     000010c4  UARTCharsAvail                
-0     000012c8  UARTDivisorLatchDisable       
+0     000010ec  UARTBreakCtl                  
+0     00001044  UARTCharsAvail                
+0     00001248  UARTDivisorLatchDisable       
 0     000003d8  UARTDivisorLatchWrite         
 0     00000970  UARTDivisorValCompute         
-0     00000d94  UARTEnhanFuncBitValRestore    
-0     00000e78  UARTEnhanFuncEnable           
-0     00001314  UARTFIFOCharGet               
+0     00000cf8  UARTEnhanFuncBitValRestore    
+0     00000e50  UARTEnhanFuncEnable           
+0     00001294  UARTFIFOCharGet               
 0     0000001c  UARTFIFOConfig                
-0     00000b58  UARTFIFORegisterWrite         
-0     00000c88  UARTLineCharacConfig          
-0     0000123c  UARTModuleReset               
-0     00000e08  UARTOperatingModeSelect       
-0     00000ee0  UARTRegConfigModeEnable       
+0     00000abc  UARTFIFORegisterWrite         
+0     00000bec  UARTLineCharacConfig          
+0     000011bc  UARTModuleReset               
+0     00000de0  UARTOperatingModeSelect       
+0     00000eb8  UARTRegConfigModeEnable       
 0     0000089c  UARTSubConfigTCRTLRModeEn     
 0     000007bc  UARTTCRTLRBitValRestore       
 abs   481cc000  __PRU_CREG_BASE_DCAN0         
@@ -254,28 +253,27 @@ abs   ffffffff  __c_args__
 0     000006a8  __pruabi_divu                 
 0     00000000  _c_int00_noinit_noargs        
 1     00000000  _stack                        
-0     000013c0  abort                         
-0     00001014  clearBufferUsed               
+0     00001340  abort                         
 1     0000010a  currentBuff                   
-0     00001334  getBuffLock                   
-0     00000bf0  getFreeBuffer                 
-0     00001270  initClocks                    
-0     00000d1c  initHalUart                   
-0     0000129c  initRxDigestor                
-0     00000f48  initSharedBuffs               
-0     000012f0  initShiftParser               
-0     00001390  initSpinLock                  
-0     00000a20  main                          
-0     00001374  memset                        
+0     000012b4  getBuffLock                   
+0     00000b54  getFreeBuffer                 
+0     000011f0  initClocks                    
+0     00000c80  initHalUart                   
+0     0000121c  initRxDigestor                
+0     00000f20  initSharedBuffs               
+0     00001270  initShiftParser               
+0     00001310  initSpinLock                  
+0     00000d6c  main                          
+0     000012f4  memset                        
 0     00000560  processIncomingData           
 1     0000010b  processingSector              
-0     00000fb0  putBuff                       
-0     000013a8  putBuffLock                   
+0     00000f88  putBuff                       
+0     00001328  putBuffLock                   
 1     0000010c  rxByte                        
 1     00000106  rxIndex                       
-0     00000abc  searchForMagicBytes           
-0     0000106c  setBufferUsed                 
-0     00001354  shiftInRxAndSearchForMagicKeys
+0     00000a20  searchForMagicBytes           
+0     00000fec  setBufferUsed                 
+0     000012d4  shiftInRxAndSearchForMagicKeys
 1     00000100  validator                     
 
 
@@ -291,35 +289,34 @@ page  address   name
 0     000007bc  UARTTCRTLRBitValRestore       
 0     0000089c  UARTSubConfigTCRTLRModeEn     
 0     00000970  UARTDivisorValCompute         
-0     00000a20  main                          
-0     00000abc  searchForMagicBytes           
-0     00000b58  UARTFIFORegisterWrite         
-0     00000bf0  getFreeBuffer                 
-0     00000c88  UARTLineCharacConfig          
-0     00000d1c  initHalUart                   
-0     00000d94  UARTEnhanFuncBitValRestore    
-0     00000e08  UARTOperatingModeSelect       
-0     00000e78  UARTEnhanFuncEnable           
-0     00000ee0  UARTRegConfigModeEnable       
-0     00000f48  initSharedBuffs               
-0     00000fb0  putBuff                       
-0     00001014  clearBufferUsed               
-0     0000106c  setBufferUsed                 
-0     000010c4  UARTCharsAvail                
-0     0000116c  UARTBreakCtl                  
-0     0000123c  UARTModuleReset               
-0     00001270  initClocks                    
-0     0000129c  initRxDigestor                
-0     000012c8  UARTDivisorLatchDisable       
-0     000012f0  initShiftParser               
-0     00001314  UARTFIFOCharGet               
-0     00001334  getBuffLock                   
-0     00001354  shiftInRxAndSearchForMagicKeys
-0     00001374  memset                        
-0     00001390  initSpinLock                  
-0     000013a8  putBuffLock                   
-0     000013c0  abort                         
-0     000013c8  C$$EXIT                       
+0     00000a20  searchForMagicBytes           
+0     00000abc  UARTFIFORegisterWrite         
+0     00000b54  getFreeBuffer                 
+0     00000bec  UARTLineCharacConfig          
+0     00000c80  initHalUart                   
+0     00000cf8  UARTEnhanFuncBitValRestore    
+0     00000d6c  main                          
+0     00000de0  UARTOperatingModeSelect       
+0     00000e50  UARTEnhanFuncEnable           
+0     00000eb8  UARTRegConfigModeEnable       
+0     00000f20  initSharedBuffs               
+0     00000f88  putBuff                       
+0     00000fec  setBufferUsed                 
+0     00001044  UARTCharsAvail                
+0     000010ec  UARTBreakCtl                  
+0     000011bc  UARTModuleReset               
+0     000011f0  initClocks                    
+0     0000121c  initRxDigestor                
+0     00001248  UARTDivisorLatchDisable       
+0     00001270  initShiftParser               
+0     00001294  UARTFIFOCharGet               
+0     000012b4  getBuffLock                   
+0     000012d4  shiftInRxAndSearchForMagicKeys
+0     000012f4  memset                        
+0     00001310  initSpinLock                  
+0     00001328  putBuffLock                   
+0     00001340  abort                         
+0     00001348  C$$EXIT                       
 1     00000000  _stack                        
 1     00000100  __TI_STACK_END                
 1     00000100  validator                     
@@ -395,4 +392,4 @@ abs   4a100000  __PRU_CREG_BASE_GEMAC
 abs   80000000  __PRU_CREG_BASE_DDR           
 abs   ffffffff  __c_args__                    
 
-[111 symbols]
+[110 symbols]

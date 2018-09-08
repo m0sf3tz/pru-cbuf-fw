@@ -10,9 +10,11 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./cbuf.obj" \
+"./buffApp.obj" \
 "./lfsr.obj" \
 "./main.obj" \
+"./shbuf.obj" \
+"./shiftParser.obj" \
 "./spinlock.obj" \
 "./uartHal.obj" \
 "./uart_irda_cir.obj" \
@@ -159,8 +161,8 @@ for_real.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "cbuf.obj" "lfsr.obj" "main.obj" "spinlock.obj" "uartHal.obj" "uart_irda_cir.obj" 
-	-$(RM) "cbuf.d" "lfsr.d" "main.d" "spinlock.d" "uartHal.d" "uart_irda_cir.d" 
+	-$(RM) "buffApp.obj" "lfsr.obj" "main.obj" "shbuf.obj" "shiftParser.obj" "spinlock.obj" "uartHal.obj" "uart_irda_cir.obj" 
+	-$(RM) "buffApp.d" "lfsr.d" "main.d" "shbuf.d" "shiftParser.d" "spinlock.d" "uartHal.d" "uart_irda_cir.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
