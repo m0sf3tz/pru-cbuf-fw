@@ -5,14 +5,20 @@
  *      Author: Sam2
  */
 #include <stdint.h>
-
+#include "spinlock.h"
 #include "sharedVariables.h"
 
-void getHeadLock(){
+
+void initSpinLock()
+{
+    putBuffLock();
+}
+
+void getBuffLock(){
     while(*(volatile uint32_t*)PRU_LOCK_OFFSET){}
 }
 
-void putHeadLock(){
+void putBuffLock(){
     (*(volatile uint32_t*)PRU_LOCK_OFFSET) = 0;
 }
 

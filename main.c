@@ -5,22 +5,18 @@
 
 #include "spinlock.h"
 #include "sharedVariables.h"
-#include "cbuf.h"
 #include "lfsr.h"
 #include "uartHal.h"
+
 
 #include "registerOffsets.h"
 #include "uart_irda_cir.h"
 
+#include "buffApp.h"
+#include "shbuf.h"
+#include "shiftParser.h"
 
-circular_buf_stats_t bufStat;
 
-void initSpinLock(){
-   memset((void*)SHBUF0_START, 0, SHBUF0_SIZE);
-
-    putHeadLock();
-    putTailLock();
-}
 
 
 void initClocks()
@@ -29,7 +25,9 @@ void initClocks()
     *(volatile uint32_t*)(CLOCK_CTRL_BASE + SPINLOCK_CLK_CTRL_OFFSET) = ENABLE_CLOCK;
 
     //dito UART2 clocks
+    *(volatile uint32_t*)(CLOCK_CTRL_BASE + UART2_CLK_CTRL_OFFSET   ) = 0;
     *(volatile uint32_t*)(CLOCK_CTRL_BASE + UART2_CLK_CTRL_OFFSET   ) = ENABLE_CLOCK;
+
 }
 
 char rxByte;
@@ -37,12 +35,8 @@ char rxByte;
 void main(void)
 {
 
-    int x;// = 0xdeadbeef;
-
     /* Clear SYSCFG[STANDBY_INIT] to enable OCP master port */
     CT_CFG.SYSCFG_bit.STANDBY_INIT = 0;
-
-    *(uint32_t*)(0x90000000) = 0x1234000;
 
 
     //start the clocks
@@ -51,40 +45,33 @@ void main(void)
     //zero out the buffers, give up spinlocks in case someone is holding them for some reason
     initSpinLock();
 
-    *(uint32_t*)(0x90000004) = 0x1234001;
-
-
 
     //Initialize the UART
     initHalUart();
 
-    circular_buf_t         buf0;
-    circular_buf_stats_t   stat;
-    circular_buf_reset(&buf0, (uint32_t*)SHBUF0_START, SHBUF0_SIZE, &stat,(uint32_t*)SHBUF0_HEAD_OFFSET,(uint32_t*)SHBUF0_TAIL_OFFSET);
+    //Initialize the structure that keeps track of the shbuffers
+    initSharedBuffs();
 
-    *(uint32_t*)(0x90000008) = 0x1234002;
+    //initialize the byte digestor
+    initRxDigestor();
 
-    while(1)
+    //initialize the shift parser
+    initShiftParser();
+
+    volatile int z = 0;
+
+
+    while(z!= 340343434)
     {
-       if(circular_buf_space(&buf0) > 1)
+
+       if(true == UARTCharsAvail(UART2_OFFSET_BLOCK_START))
        {
-           if(true == UARTCharsAvail(UART2_OFFSET_BLOCK_START))
-           {
-               rxByte = UARTFIFOCharGet(UART2_OFFSET_BLOCK_START);
-               circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-               UARTCharPut(UART2_OFFSET_BLOCK_START, rxByte);
-           }
+           rxByte = UARTFIFOCharGet(UART2_OFFSET_BLOCK_START);
+           processIncomingData(rxByte);
+           z++;
        }
+
     }
-
-
-    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-    circular_buf_put(&buf0, (char*)&rxByte,  sizeof(char));
-
-
-    circular_buf_get(&buf0, (char*)&rxByte,  8);
+    clearBufferUsed(0);
 
 }

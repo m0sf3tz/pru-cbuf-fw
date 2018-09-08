@@ -9,49 +9,61 @@ CMD_SRCS += \
 ../AM335x_PRU.cmd 
 
 C_SRCS += \
-../cbuf.c \
+../buffApp.c \
 ../lfsr.c \
 ../main.c \
+../shbuf.c \
+../shiftParser.c \
 ../spinlock.c \
 ../uartHal.c \
 ../uart_irda_cir.c 
 
 C_DEPS += \
-./cbuf.d \
+./buffApp.d \
 ./lfsr.d \
 ./main.d \
+./shbuf.d \
+./shiftParser.d \
 ./spinlock.d \
 ./uartHal.d \
 ./uart_irda_cir.d 
 
 OBJS += \
-./cbuf.obj \
+./buffApp.obj \
 ./lfsr.obj \
 ./main.obj \
+./shbuf.obj \
+./shiftParser.obj \
 ./spinlock.obj \
 ./uartHal.obj \
 ./uart_irda_cir.obj 
 
 OBJS__QUOTED += \
-"cbuf.obj" \
+"buffApp.obj" \
 "lfsr.obj" \
 "main.obj" \
+"shbuf.obj" \
+"shiftParser.obj" \
 "spinlock.obj" \
 "uartHal.obj" \
 "uart_irda_cir.obj" 
 
 C_DEPS__QUOTED += \
-"cbuf.d" \
+"buffApp.d" \
 "lfsr.d" \
 "main.d" \
+"shbuf.d" \
+"shiftParser.d" \
 "spinlock.d" \
 "uartHal.d" \
 "uart_irda_cir.d" 
 
 C_SRCS__QUOTED += \
-"../cbuf.c" \
+"../buffApp.c" \
 "../lfsr.c" \
 "../main.c" \
+"../shbuf.c" \
+"../shiftParser.c" \
 "../spinlock.c" \
 "../uartHal.c" \
 "../uart_irda_cir.c" 
